@@ -1,3 +1,0 @@
-pip install bcrypt                  (encriptar contraseñas)
-pip install python-dateutil         (Calcular edad con fecha nacimiento)
-pip install flask
