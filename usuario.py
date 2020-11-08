@@ -39,18 +39,16 @@ def Crear(correo, contraseña, contraseña2, nombre, apellido_p, apellido_m, fec
 
     # Correo
     result = database.Query("SELECT EXISTS(SELECT * FROM usuario WHERE correo='"+correo+"')")
-    if result[0][0] == 0:
-        finish = True
-    else:
-        poshoUI.DrawError("Este correo ya existe.")
+    if result[0][0] != 0:
+        #poshoUI.DrawError("Este correo ya existe.")
+        return 1
 
     # Contraseña
     if contraseña == contraseña2:
-        finish = True
         contraseña = str(encriptar.encode(contraseña))
     else:
-        poshoUI.DrawError("Las contraseñas no coinciden.")
-
+        #poshoUI.DrawError("Las contraseñas no coinciden.")
+        return 2
     # Nombre
 
     #Hace que todos los nombres esten con la primera letra en mayuscula y el resto en minuscula.
@@ -84,6 +82,8 @@ def Crear(correo, contraseña, contraseña2, nombre, apellido_p, apellido_m, fec
         '"""+arquetipo+"""'
     )
     """)
+    return 0
+
 
 def Salir():
     return ""

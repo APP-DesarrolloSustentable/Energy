@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Intellir - Bootstrap 4x Mobile HTML5 Template</title>
+	<title>Eco Energy</title>
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 	<!-- google font -->
 	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet" type="text/css" />
@@ -63,15 +63,15 @@
 				 <ul id="dc_accordion" class="sidebar-menu tree">
 					<li class="menu_title">Menu Principal</li>
 					<li>
-						<a href="index.html"> <i class="fa fa-home"> </i>Inicio </a>
+						<a href="/"> <i class="fa fa-home"> </i>Inicio </a>
 					</li>
 					<li>
-						<a href="index.html"> <i class="fa fa-info"> </i>Consejos </a>
+						<a href="/"> <i class="fa fa-info"> </i>Consejos </a>
 					</li>
 	
 					<li>
 					<li>
-						<a href="index.html"> <i class="fa fa-cog"> </i>Configuracion </a>
+						<a href="/"> <i class="fa fa-cog"> </i>Configuracion </a>
 					</li>
 
 					<li>
@@ -91,7 +91,6 @@
 					<div class="col-12">
 						<div class="page-breadcrumb alig">
 							<h1 align="center">Mis grupos</h1>
-							<h1 align="center">Hola {{session["correo"]}}</h1>
 						</div>
 					</div>
 				</div>
@@ -103,41 +102,22 @@
 						
 						<!--------------------------------------------- Group Box ---------------------------------------------------------->
 						<div class="row">
+							{% for i in range(size)%}
 							<div class="col-12">
-								<div class="info_items Medium_Aquarum d-flex align-items-center">
+								<div class="info_items {{color[i%3]}} d-flex align-items-center">
 									<span class="info_items_icon">
 										<i class="ion-android-people"></i>
 									</span>
 									<div class="info_item_content">
-										<span class="info_items_text">familia Valdez</span>
-										<span class="info_items_number">450</span>
+										<span class="info_items_text">{{session["grupos"][i][1]}}</span>
+										<span class="info_items_number">{{session["grupos"][i][2]}}</span>
 									</div>
 								</div>
 							</div>
+							{% endfor %}
+							
 
-							<div class="col-12">
-								<div class="info_items Verdigris d-flex align-items-center">
-									<span class="info_items_icon">
-										<i class="ion-android-people"></i>
-									</span>
-									<div class="info_item_content">
-										<span class="info_items_text">familia Lira</span>
-										<span class="info_items_number">450</span>
-									</div>
-								</div>
-							</div>
-
-							<div class="col-12">
-								<div class="info_items Skobeloff d-flex align-items-center">
-									<span class="info_items_icon">
-										<i class="ion-android-people"></i>
-									</span>
-									<div class="info_item_content">
-										<span class="info_items_text">familia Gomez</span>
-										<span class="info_items_number">450</span>
-									</div>
-								</div>
-							</div>
+						
 							<div class="col-12">
 								<button type="button" class="btn btn-secondary btn-lg btn-block btn_Medium_Aquarum">Agregar Grupo</button>
 

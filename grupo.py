@@ -75,7 +75,8 @@ def Listar(id_usuario):
     result = database.Query("""
     SELECT
         grupo.id_grupo,
-        grupo.nombre
+        grupo.nombre,
+        grupo.puntos
     FROM
         grupo,
         usuario,

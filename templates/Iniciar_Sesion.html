@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Intellir - Bootstrap 4x Mobile HTML5 Template</title>
+	<title>Eco Energy</title>
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 	<!-- google font -->
 	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet" type="text/css" />
@@ -34,11 +34,18 @@
                             <div class="card-body">
                                 <form method="POST">
                                     <div class="form-group">
-                                        <input type="text" class="form-control login-input" name="correo" id="correo" placeholder="Correo Electronico">
+                                        <input type="email" class="form-control login-input" name="correo" id="correo" placeholder="Correo Electronico" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control login-input" name="contraseña" id="contraseña" placeholder="Contraseña">
+                                        <input type="password" class="form-control login-input" name="contraseña" id="contraseña" placeholder="Contraseña" required>
                                     </div>
+                                    {% if error != "" %}
+                                    <div class="alert alert-danger border-0" role="alert">
+                                        {{error}}
+                                    </div>
+                                    {% endif %}
+
+
                                     <div class="center">
 
                                     <button type="submit" class="btn btn-primary log-btn">
