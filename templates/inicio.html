@@ -1,157 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html"%}
+{% block content%}
 
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Eco Energy</title>
-	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-	<!-- google font -->
-	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet" type="text/css" />
-	<link href="../static/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-	<link href="../static/css/style.css" rel="stylesheet">
-	<link href="../static/css/responsive.css" rel="stylesheet">
+	<div class="content_wrapper">
+		<div class="container-fluid">
 
-	<link href="../static/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	<link href="../static/css/ionicons.css" rel="stylesheet" type="text/css">
-	<link href="../static/css/simple-line-icons.css" rel="stylesheet" type="text/css">
-	<link href="../static/css/jquery.mCustomScrollbar.css" rel="stylesheet">
-	<link href="../static/css/weather-icons.min.css" rel="stylesheet">
-	<!--Morris Chart -->
-	<link rel="stylesheet" href="../static/js/index/morris-chart/morris.css">
-
-</head>
-
-<body>
-
-	<div class="wrapper">
-		<!-------------------------------------------- header ---------------------------------------------------------------------------->
-		<header class="main-header">
-			<div class="container_header">
-				<div class="logo d-flex align-items-center">
-					<a href="#"> <strong class="logo_icon"> <img src="images/logo_titulo_verde_cuadrado.png" alt=""> </strong> <span class="logo-default">
-							<img src="images/logo_titulo_verde_cuadrado.png" alt=""> </span> </a>
-					<div class="icon_menu full_menu">
-						<a href="#!" class="menu-toggler sidebar-toggler"></a>
-					</div>
-				</div>
-				<div class="right_detail">
-					<div class="row d-flex align-items-center min-h pos-md-r">
-						<div class="col-3 search_col ">
-							<div class="top_function">
-
-							</div>
-						</div>
-						<div class=" col-9 d-flex justify-content-end">
-							<div class="right_bar_top d-flex align-items-center">
-
-							
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-		</header>
-		<!-------------------------------------------- header End ---------------------------------------------------------------------------->
-
-
-		<!-------------------------------------------- Menu ---------------------------------------------------------------------------->
-		<div class="container_full">
-			<div class="side_bar dark_blue side_bg_img scroll_auto">
-				 <ul id="dc_accordion" class="sidebar-menu tree">
-					<li class="menu_title">Menu Principal</li>
-					<li>
-						<a href="/"> <i class="fa fa-home"> </i>Inicio </a>
-					</li>
-					<li>
-						<a href="/"> <i class="fa fa-info"> </i>Consejos </a>
-					</li>
-	
-					<li>
-					<li>
-						<a href="/"> <i class="fa fa-cog"> </i>Configuracion </a>
-					</li>
-
-					<li>
-						<a href = "/cerrar_sesion" name="cerrar_sesion"> <i class="fa fa-close"> </i>Cerrar Sesion </a>
-
-					</li>
-				</ul>
-
-			</div>
-			<!-------------------------------------------- Menu end ---------------------------------------------------------------------------->
-
-			<div class="content_wrapper">
-				<div class="container-fluid">
-
+<!--------------------------------------------- Title  --------------------------------------------------------------------------------->
 			<div class="page-heading">
-				<div class="row d-flex align-items-center">
+				<div class="row d-flex align-items-center" id="title_header">
 					<div class="col-12">
 						<div class="page-breadcrumb alig">
-							<h1 align="center">Mis grupos</h1>
+							<h1 align="center" class= "title-header">Mis grupos</h1>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<!--------------------------------------------- Section --------------------------------------------------------------------------------->
+<!--------------------------------------------- End Title  --------------------------------------------------------------------------------->
 
-					<section class="chart_section">
-						
-						<!--------------------------------------------- Group Box ---------------------------------------------------------->
-						<div class="row">
-							{% for i in range(size)%}
+<!--------------------------------------------- Mensaje Agregar Grupo  --------------------------------------------------------------------------------->
+
+	{% if size == 0 %}					
+		<div class="page-breadcrumb alig" align="center">
+			<p align="center" class= "title-header">Dar click en "Agregar Grupo" para crear tu primer grupo</p>
+		</div>
+	{% endif %}
+<!---------------------------------------------  End Mensaje Agregar Grupo  --------------------------------------------------------------------------------->
+
+			<div class="row">
+<!--------------------------------------------- Group Box ---------------------------------------------------------->
+						{% for i in range(size)%}
 							<div class="col-12">
-								<div class="info_items {{color[i%3]}} d-flex align-items-center">
-									<span class="info_items_icon">
-										<i class="ion-android-people"></i>
-									</span>
+								<form action="/grupo" method="POST">
+									<input type="hidden" name="idGrupo" value="{{session['grupos'][i][0]}}">
+									<button  type= "submit" class="info_items {{color[i%3]}} d-flex align-items-center groups">
+									<span class="info_items_icon"> <i class="ion-android-people"></i> </span>
 									<div class="info_item_content">
 										<span class="info_items_text">{{session["grupos"][i][1]}}</span>
 										<span class="info_items_number">{{session["grupos"][i][2]}}</span>
+
 									</div>
-								</div>
+								</button>
+							</form>
 							</div>
-							{% endfor %}
-							
+						{% endfor %}
 
-						
-							<div class="col-12">
-								<button type="button" class="btn btn-secondary btn-lg btn-block btn_Medium_Aquarum">Agregar Grupo</button>
-
-							</div>
+				
 
 
-							</div>
-						</div>
+<!--------------------------------------------- End Group Box  --------------------------------------------------------------------------------->
 
-					</section>
 
-				</div>
+<!--------------------------------------------- Agregar Grupo ---------------------------------------------------------->
+
+					<div class="col-12">
+						<button type="button" class="btn btn-secondary btn-lg btn-block btn_Medium_Aquarum">Agregar Grupo</button>
+					</div>
+<!--------------------------------------------- End Agregar Grupo ---------------------------------------------------------->
+
 			</div>
+
 		</div>
-	
-
 	</div>
-	<script type="text/javascript" src="../static/js/jquery.min.js"></script>
-	<script type="text/javascript" src="../static/js/popper.min.js"></script>
-	<script type="text/javascript" src="../static/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="../static/js/jquery.mCustomScrollbar.concat.min.js"></script>
 
-	<!--Morris Chart-->
-	<script src="../static/js/index/morris-chart/morris.js"></script>
-	<script src="../static/js/index/morris-chart/raphael-min.js"></script>
-	<!--morris chart initialization-->
-	<script src="../static/js/index/morris-chart/morris-init.js"></script>
-	<!--chartjs Total Profit,New Orders,Yearly Revineue,New Users-->
-	<script src="../static/js/Chart.min.js"></script>
-	<script src="../static/js/chartjs-init.js"></script>
 
-	<script type="text/javascript" src="../static/js/jquery.dcjqaccordion.2.7.js"></script>
-	<script src="../static/js/custom.js" type="text/javascript"></script>
+{% endblock %}
 
-</body>
-
-</html>
+	

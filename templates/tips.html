@@ -1,0 +1,46 @@
+{% extends "base.html"%}
+{% block content%}
+
+	<div class="content_wrapper">
+		<div class="container-fluid">
+
+<!--------------------------------------------- Title  --------------------------------------------------------------------------------->
+			<div class="page-heading">
+				<div class="row d-flex align-items-center">
+					<div class="col-12">
+						<div class="page-breadcrumb alig">
+							<h1 align="center">Consejos</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+
+<!--------------------------------------------- End Title  --------------------------------------------------------------------------------->
+
+			<div class="row">
+
+<!--------------------------------------------- tips  ---------------------------------------------------------->
+
+					<div class=" col-12">
+							<div class="card-body">
+								{% for i in range(size)%}
+								<div class="alert alert-success border-0" role="alert">
+									{{tips[i][0]}}
+								</div>
+							{% endfor %}
+
+								
+								
+							</div>
+					</div>
+<!--------------------------------------------- End tips  ---------------------------------------------------------->
+
+			</div>
+
+		</div>
+	</div>
+
+
+{% endblock %}
+
+	

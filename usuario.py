@@ -31,9 +31,30 @@ def getName(correo):
     result = database.Query("SELECT nombre FROM usuario WHERE correo='"+correo+"'")
     return result[0][0]
 
+    
+def getApellidoP(correo):
+    result = database.Query("SELECT apellido_paterno FROM usuario WHERE correo='"+correo+"'")
+    return result[0][0]
+
+def getApellidoM(correo):
+    result = database.Query("SELECT apellido_materno FROM usuario WHERE correo='"+correo+"'")
+    return result[0][0]
+
+
 def getId(correo):
     result = database.Query("SELECT id_usuario FROM usuario WHERE correo='"+correo+"'")
     return result[0][0]
+
+
+def getArquetipo(correo):
+    result = database.Query("SELECT arquetipo FROM usuario WHERE correo='"+correo+"'")
+    return result[0][0]
+
+
+def getPrivilegios(correo):
+    result = database.Query("SELECT arquetipo FROM usuario WHERE correo='"+correo+"'")
+    return result[0][0]
+
 
 def Crear(correo, contraseña, contraseña2, nombre, apellido_p, apellido_m, fecha):
 
@@ -106,13 +127,14 @@ def Detalles(correo):
 
 
 def CambiarArquetipo(arquetipo, correo):
-    arquetipo = arquetipo.lower()
+    database.Query("UPDATE usuario SET arquetipo ='"+arquetipo+"' WHERE correo = '" +correo+"'")
 
-    if arquetipo == "adulto" or arquetipo == "niño":
-        database.Query("UPDATE usuario SET arquetipo ='"+arquetipo+"' WHERE correo = '" +correo+"'")
-        poshoUI.DrawHeader("Arquetipo actualizado correctamente!")
-    else:
-        poshoUI.DrawError("Arquetipo no válido.")
+
+def CambiarNombre(nombre, apellido_p, apellido_m, correo):
+    database.Query("UPDATE usuario SET nombre ='"+nombre+"' WHERE correo = '" +correo+"'")
+    database.Query("UPDATE usuario SET apellido_paterno ='"+apellido_p+"' WHERE correo = '" +correo+"'")
+    database.Query("UPDATE usuario SET apellido_materno ='"+apellido_m+"' WHERE correo = '" +correo+"'")
+    return 
 
 def CambiarFechaNacimiento(correo, fecha):
     database.Query("UPDATE usuario SET fecha_nacimiento ='"+fecha+"' WHERE correo = '" +correo+"'")
