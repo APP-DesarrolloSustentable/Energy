@@ -10,7 +10,7 @@
 					<div class="col-12">
 						<div class="page-breadcrumb alig">
 							<h1 align="center"> {{session["nombreGrupo"][0][0]}}</h1>
-							<h1 align="center"> Puntaje: <b> {{session["puntaje"][0][0]}}</b></h1>
+							<h2 align="center"> Puntaje: <b> {{session["puntaje"][0][0]}}</b></h2>	<br>
 
 						</div>
 					</div>
@@ -30,26 +30,68 @@
 			</div>
 		</div>
 		<div class="card-body">
+
+			{% if session["privilegios"][0][0] == "admin" %}			
+
+				{% for i in range(size)%}
+
+				<div class="media mb-4">
+					<div class="media-body">
+						<p class="mb-0">
+							<form action="">
+								<button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="float: right;">
+									<i class="fa fa-edit" aria-hidden="true"></i>
+								</button>
+								<div class="dropdown-menu dropdown-menu-right">
+									<a class="dropdown-item" href="#">Cambiar Rol</a>
+									<a class="dropdown-item" href="#">Eliminar</a>
+								</div>
+							<strong class="">{{miembros[i][1]}}</strong>  <br/>
+							<span>{{miembros[i][2]}}</span> <br/>
+							<span><b> {{miembros[i][3]}} </b> </span>
+							
+						</p>
+
+					</form>
+
+					</div>	
+				</div>
+				{% endfor %}
+
+			{% else %}
+
 			{% for i in range(size)%}
+
 			<div class="media mb-4">
 				<div class="media-body">
 					<p class="mb-0">
-						<strong class="">{{miembros[i][1]}}</strong>
+						<strong class="">{{miembros[i][1]}}</strong>  <br/>
+						<span>{{miembros[i][2]}}</span> <br/>
+						<span><b> {{miembros[i][3]}} </b> </span>
 					</p>
-					<span>{{miembros[i][2]}}</span>  <br />
-					<span><b> {{miembros[i][3]}}</b> </span>
-
 				</div>	
 			</div>
-
 			{% endfor %}
 
-			
-				
-			</div>
+			{% endif %}
+
+					
 		</div>
 
-		
+	</div>
+	<div class="col-12">
+		<button type="button" class="btn btn-secondary btn-lg btn-block btn_Medium_Aquarum">Modificar Electrodomesticos</button>
+	</div>
+
+	<div class="col-12">
+		<button type="button" class="btn btn-secondary btn-lg btn-block btn_Medium_Aquarum">Reportar Consumo Diario</button>
+	</div>
+
+	<div class="col-12">
+		<button type="button" class="btn btn-secondary btn-lg btn-block btn_Medium_Aquarum">Ver Estadisticas</button>
+	</div>
+
+	
 	</div>
 </div>
 

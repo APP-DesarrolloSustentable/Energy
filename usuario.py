@@ -51,10 +51,6 @@ def getArquetipo(correo):
     return result[0][0]
 
 
-def getPrivilegios(correo):
-    result = database.Query("SELECT arquetipo FROM usuario WHERE correo='"+correo+"'")
-    return result[0][0]
-
 
 def Crear(correo, contraseña, contraseña2, nombre, apellido_p, apellido_m, fecha):
 
@@ -162,3 +158,19 @@ def CambiarContrasena(correo, contraseña, nuevaContraseña):
             poshoUI.DrawError("Antigua contraseña incorrecta.")
 
     return
+
+
+def getPrivilegios(g_id, correo):
+    result = database.Query("""
+    SELECT
+    grupo_usuario.rol
+    FROM
+        grupo,
+        usuario,
+        grupo_usuario
+    WHERE
+        grupo.id_grupo = """+str(g_id)+"""
+        AND grupo.id_grupo = grupo_usuario.id_grupo
+        AND grupo_usuario.id_usuario = usuario.id_usuario AND usuario.correo = '""" + str(correo) +""" ' 
+    """)
+    return result

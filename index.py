@@ -98,6 +98,8 @@ def paginaGrupo():
                 session["idGrupo"] = request.form["idGrupo"]
                 session["nombreGrupo"] = grupo.getNombre(session["idGrupo"])
                 session["puntaje"] = grupo.getPuntaje(session["idGrupo"])
+                session["privilegios"] = usuario.getPrivilegios(session["idGrupo"], session["correo"])
+                print(session["privilegios"])
                 print("nombre", session["nombreGrupo"])
                 miembros = grupo.Miembros(session["idGrupo"])
                 size = len(miembros)
@@ -139,17 +141,19 @@ def configuracion():
                     session["nombre"] = request.form["nombre"]
                     session["apellido_p"] = request.form["apellido_p"]
                     session["apellido_m"] = request.form["apellido_m"]
+                    return render_template('Configuracion_Respuesta_Correcta.html')  
                 elif "arquetipo" in request.form:
                     print( request.form["arquetipo"])
                     usuario.CambiarArquetipo(request.form["arquetipo"], session["correo"])
                     session["arquetipo"] = request.form["arquetipo"]
+                    return render_template('Configuracion_Respuesta_Correcta.html')  
                 elif "contraseña" in request.form:
                     if usuario.validar(session["correo"], request.form["contraseña"]):
                         if  request.form["contraseña2"] ==   request.form["contraseña3"]:
                             usuario.CambiarContrasena(session["correo"], session["contraseña"],  request.form["contraseña2"])
-                            print("else")
+                            return render_template('Configuracion_Respuesta_Correcta.html')  
                         else:
-                            error = "las nuevas contraseñas no coinciden"
+                            error = "No coinciden las contraseñas"
                             return render_template('configuracion_Resultado.html', error = error)  
 
                     else:
