@@ -15,6 +15,7 @@ def Miembros(g_id):
     SELECT
     usuario.id_usuario,
     usuario.nombre,
+    usuario.correo,
     grupo_usuario.rol
     FROM
         grupo,
@@ -83,5 +84,26 @@ def Listar(id_usuario):
         grupo_usuario
     WHERE
         usuario.id_usuario ='"""+ str(id_usuario) +"""' AND usuario.id_usuario = grupo_usuario.id_usuario AND grupo_usuario.id_grupo = grupo.id_grupo
+        """)
+    return result
+
+def getNombre(id_Grupo):
+    result = database.Query("""
+    SELECT
+        nombre,
+        puntos
+    FROM
+        grupo
+    WHERE id_grupo ='"""+ str(id_Grupo) +"""'
+        """)
+    return result
+
+def getPuntaje(id_Grupo):
+    result = database.Query("""
+    SELECT
+        puntos
+    FROM
+        grupo
+    WHERE id_grupo ='"""+ str(id_Grupo) +"""'
         """)
     return result

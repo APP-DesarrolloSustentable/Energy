@@ -96,7 +96,18 @@ def paginaGrupo():
         if session["logged_in"] == True:
             if request.method == "POST":
                 session["idGrupo"] = request.form["idGrupo"]
-            return render_template('grupo.html', session=session)  
+                session["nombreGrupo"] = grupo.getNombre(session["idGrupo"])
+                session["puntaje"] = grupo.getPuntaje(session["idGrupo"])
+                print("nombre", session["nombreGrupo"])
+                miembros = grupo.Miembros(session["idGrupo"])
+                size = len(miembros)
+                print(miembros)
+                print(miembros[0][1])
+                print(miembros[0][2])
+                return render_template('grupo.html', session=session, miembros = miembros, size = size)
+            else:
+                return redirect(url_for("inicio"))
+
         else:
             return redirect(url_for("index"))
     else:

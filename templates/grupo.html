@@ -9,7 +9,9 @@
 				<div class="row d-flex align-items-center">
 					<div class="col-12">
 						<div class="page-breadcrumb alig">
-							<h1 align="center">Grupo {{session["idGrupo"]}}</h1>
+							<h1 align="center"> {{session["nombreGrupo"][0][0]}}</h1>
+							<h1 align="center"> Puntaje: <b> {{session["puntaje"][0][0]}}</b></h1>
+
 						</div>
 					</div>
 				</div>
@@ -17,13 +19,44 @@
 
 <!--------------------------------------------- End Title  --------------------------------------------------------------------------------->
 
-			<div class="row">
+<div class="col-12">
+	<div class="card card-shadow mb-4">
+		<div class="card-header">
+			<div class="card-title" align="center">
+				Miembros del grupo
+				<div class="btn-group float-right task-list-action">
+				
+				</div>
+			</div>
+		</div>
+		<div class="card-body">
+			{% for i in range(size)%}
+			<div class="media mb-4">
+				<div class="media-body">
+					<p class="mb-0">
+						<strong class="">{{miembros[i][1]}}</strong>
+					</p>
+					<span>{{miembros[i][2]}}</span>  <br />
+					<span><b> {{miembros[i][3]}}</b> </span>
+
+				</div>	
+			</div>
+
+			{% endfor %}
+
+			
+				
+			</div>
+		</div>
+
+		
+	</div>
+</div>
 
 <!--------------------------------------------- tips  ---------------------------------------------------------->
 
 <!--------------------------------------------- End tips  ---------------------------------------------------------->
 
-			</div>
 
 		</div>
 	</div>
