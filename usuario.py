@@ -46,6 +46,11 @@ def getId(correo):
     return result[0][0]
 
 
+def getCorreo(id):
+    result = database.Query("SELECT correo FROM usuario WHERE id_usuario='"+id+"'")
+    return result[0][0]
+
+
 def getArquetipo(correo):
     result = database.Query("SELECT arquetipo FROM usuario WHERE correo='"+correo+"'")
     return result[0][0]

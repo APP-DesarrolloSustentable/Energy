@@ -2020,6 +2020,7 @@ body {
 }
 .btn-demo .btn {
 	margin: 0 10px 10px 0;
+	width: 45%;
 }
 [data-toggle=buttons] > .btn input[type=checkbox],
 [data-toggle=buttons] > .btn input[type=radio],
@@ -2168,8 +2169,8 @@ h6 {
 .btn-outline-info:not([disabled]):not(.disabled):active,
 .card-info,
 .show > .btn-outline-info.dropdown-toggle {
-	border-color: #36a2f5 !important;
-	background-color: #36a2f5 !important;
+	border-color: #4fb4b7 !important;
+	background-color: #4fb4b7 !important;
 }
 .btn-outline-warning:hover,
 .btn-outline-warning:not([disabled]):not(.disabled).active,
@@ -2239,8 +2240,8 @@ h6 {
 .btn-outline-info:not([disabled]):not(.disabled):active,
 .card-info,
 .show > .btn-outline-info.dropdown-toggle {
-	border-color: #36a2f5;
-	background-color: #36a2f5;
+	border-color: #49d49d;
+	background-color: #49d49d;
 }
 .card-body .dropdown .dropdown-menu {
 	left: 0 !important;
@@ -3891,8 +3892,9 @@ button.btn-link {
 	color: #9c9c9c;
 }
 .btn-info {
-	background-color: #2bb3c0;
+	background-color: #49d49d;
 	border: none;
+	margin: 0;
 }
 .btn-group,
 .btn-group-vertical {
@@ -4895,4 +4897,43 @@ li.list-group-item:first-child {
 
 .groups {
 	border: none;
+}
+
+.dropbtn {
+	background-color: #4CAF50;
+	color: white;
+	padding: 16px;
+	font-size: 16px;
+	border: none;
+  }
+  
+  .dropdown {
+	position: relative;
+	display: inline-block;
+  }
+  
+  .dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f1f1f1;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+  }
+  
+  .dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+  }
+  
+  .dropdown-content a:hover {background-color: #ddd;}
+  
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+#btn-full {
+	width: 95%;
 }

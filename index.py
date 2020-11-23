@@ -99,13 +99,9 @@ def paginaGrupo():
                 session["nombreGrupo"] = grupo.getNombre(session["idGrupo"])
                 session["puntaje"] = grupo.getPuntaje(session["idGrupo"])
                 session["privilegios"] = usuario.getPrivilegios(session["idGrupo"], session["correo"])
-                print(session["privilegios"])
-                print("nombre", session["nombreGrupo"])
                 miembros = grupo.Miembros(session["idGrupo"])
                 size = len(miembros)
-                print(miembros)
-                print(miembros[0][1])
-                print(miembros[0][2])
+
                 return render_template('grupo.html', session=session, miembros = miembros, size = size)
             else:
                 return redirect(url_for("inicio"))
@@ -115,6 +111,97 @@ def paginaGrupo():
     else:
         return redirect(url_for("index"))
 
+
+@app.route('/CrearGrupo', methods=['POST', 'GET'])
+def CrearGrupo():
+    if session.get('logged_in'):
+        if request.method == "POST":
+            nuevoGrupo = request.form["nombreGrupo"]
+            grupo.Crear(session["id"], nuevoGrupo)
+
+    return redirect(url_for("index"))
+
+@app.route('/UnirseGrupo', methods=['POST', 'GET'])
+def UnirseGrupo():
+    if session.get('logged_in'):
+        if request.method == "POST":
+            GrupoIngresar = request.form["codigoGrupo"]
+            grupo.Invitar(GrupoIngresar, session["id"])
+
+    return redirect(url_for("index"))
+
+@app.route('/EliminarGrupo', methods=['POST', 'GET'])
+def EliminarGrupo():
+    if session.get('logged_in'):
+        if request.method == "POST":
+            if request.form["MenuGrupo"] == "EliminarGrupo":
+                idGrupo = request.form["idGrupo"]
+                print(idGrupo)
+                grupo.Borrar(idGrupo)
+
+    return redirect(url_for("index"))
+
+
+@app.route('/EliminarMiembro', methods=['POST', 'GET'])
+def EliminarMiembro():
+    if session.get('logged_in'):
+        if session["logged_in"] == True:
+            if request.method == "POST":
+                size  = len(grupo.Miembros(session["idGrupo"]))        
+                if size > 1:
+                    grupo.QuitarMiembro(session["idGrupo"], request.form["userID"])
+                    miembros = grupo.Miembros(session["idGrupo"])        
+                    size = len(miembros)
+                    return render_template('grupo.html', session=session, miembros = miembros, size = size)
+                else:
+                    aviso = "No puede dejar el grupo sin miembros"
+                    return render_template('Grupo_Aviso.html', aviso = aviso)
+
+            return render_template('grupo.html', session=session, miembros = miembros, size = size)
+        else:
+            return redirect(url_for("index"))
+    else:
+        return redirect(url_for("index"))
+
+
+
+@app.route('/CambiarRol', methods=['POST', 'GET'])
+def CambiarRol():
+    if session.get('logged_in'):
+        if session["logged_in"] == True:
+            if request.method == "POST":
+                print("POSTED Eliminar")
+                miembros = grupo.Miembros(session["idGrupo"])       
+                contAdmin = 0
+                for miembro in miembros:
+                    if miembro[3] == "admin":
+                        contAdmin +=1
+                if contAdmin > 1:
+                    id = request.form["userID"]
+                    correo = usuario.getCorreo(id)
+                    privilegios = usuario.getPrivilegios(session["idGrupo"], correo)[0][0]
+                    print(session["idGrupo"], id, correo, privilegios)
+
+                    if privilegios == "admin":
+                        privilegios = "basic"
+                    else: 
+                        privilegios = "admin"
+
+                    print(privilegios)
+                    session["privilegios"] = privilegios
+                    grupo.CambiarRol(session["idGrupo"], id, privilegios)
+                    miembros = grupo.Miembros(session["idGrupo"])        
+                    size = len(miembros)
+                    return render_template('grupo.html', session=session, miembros = miembros, size = size)
+                else: 
+                    aviso = "No puede dejar el grupo sin administrador"
+                    return render_template('Grupo_Aviso.html', aviso = aviso)
+                   
+            return redirect(url_for("index"))
+        else:
+            return redirect(url_for("index"))
+    else:
+        return redirect(url_for("index"))
 
 
 @app.route('/tips', methods=['POST', 'GET'])

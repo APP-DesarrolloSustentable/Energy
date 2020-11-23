@@ -31,12 +31,12 @@
 						{% for i in range(size)%}
 							<div class="col-12">
 								<form action="/grupo" method="POST">
-									<input type="hidden" name="idGrupo" value="{{session['grupos'][i][0]}}">
+									<input type="hidden" name="idGrupo" value="{{session['gruposAdmin'][i][0]}}">
 									<button  type= "submit" class="info_items {{color[i%3]}} d-flex align-items-center groups">
 									<span class="info_items_icon"> <i class="ion-android-people"></i> </span>
 									<div class="info_item_content">
-										<span class="info_items_text">{{session["grupos"][i][1]}}</span>
-										<span class="info_items_number">{{session["grupos"][i][2]}}</span>
+										<span class="info_items_text">{{session["gruposAdmin"][i][1]}}</span>
+										<span class="info_items_number">{{session["gruposAdmin"][i][2]}}</span>
 
 									</div>
 								</button>

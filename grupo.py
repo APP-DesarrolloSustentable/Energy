@@ -53,7 +53,7 @@ def CambiarRol(g_id, m_id, rol):
     UPDATE
     grupo_usuario
     SET
-        rol = '"""+rol+"""'
+        rol = '"""+str(rol)+"""'
     WHERE
         id_grupo ='"""+str(g_id)+ """' AND id_usuario = '"""+str(m_id)+"""'
     """)
@@ -69,8 +69,15 @@ def QuitarMiembro(g_id, m_id):
     """)
     return result
 
-def Borrar():
-    return
+def Borrar(g_id):
+    result = database.Query("""
+    DELETE
+    FROM
+        grupo
+    WHERE
+        id_grupo = '"""+str(g_id)+"""' 
+    """)
+    return result
 
 def Listar(id_usuario):
     result = database.Query("""

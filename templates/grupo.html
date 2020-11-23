@@ -10,13 +10,18 @@
 					<div class="col-12">
 						<div class="page-breadcrumb alig">
 							<h1 align="center"> {{session["nombreGrupo"][0][0]}}</h1>
-							<h2 align="center"> Puntaje: <b> {{session["puntaje"][0][0]}}</b></h2>	<br>
+							<h2 align="center"> Codigo de acceso: <b> {{session["idGrupo"]}}</b></h2>	<br>
+
+							<!--<h2 align="center"> Puntaje: <b> {{session["puntaje"][0][0]}}</b> </h2>	<br> -->
+		
+							
 
 						</div>
 					</div>
 				</div>
 			</div>
 
+		
 <!--------------------------------------------- End Title  --------------------------------------------------------------------------------->
 
 <div class="col-12">
@@ -38,21 +43,30 @@
 				<div class="media mb-4">
 					<div class="media-body">
 						<p class="mb-0">
-							<form action="">
-								<button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="float: right;">
-									<i class="fa fa-edit" aria-hidden="true"></i>
-								</button>
-								<div class="dropdown-menu dropdown-menu-right">
-									<a class="dropdown-item" href="#">Cambiar Rol</a>
-									<a class="dropdown-item" href="#">Eliminar</a>
-								</div>
+
+							<div class="dropdown" style="float: right;">
+								<button class="dropbtn btn btn-success dropdown-toggle"><i class="fa fa-edit" aria-hidden="true" aria-expanded="false" aria-haspopup="true"></i> </button>
+									<input type="hidden" name="userID" id ="userID" value="{{miembros[i][0]}}">
+									<div class="dropdown-content dropdown-menu-right">
+										<form method="POST" id="EliminarMiembro{{i}}"action="/EliminarMiembro" >
+										<a onclick="document.getElementById('EliminarMiembro{{i}}').submit();">Eliminar</a>
+										<input type="hidden" name="userID" id ="userID" value="{{miembros[i][0]}}">
+										</form>
+
+										<form method="POST" id="CambiarRol{{i}}"action="/CambiarRol" >
+											<a onclick="document.getElementById('CambiarRol{{i}}').submit();">Cambiar Rol</a>
+											<input type="hidden" name="userID" id ="userID" value="{{miembros[i][0]}}">
+										</form>
+									</div>
+
+							</div>
+							
 							<strong class="">{{miembros[i][1]}}</strong>  <br/>
 							<span>{{miembros[i][2]}}</span> <br/>
 							<span><b> {{miembros[i][3]}} </b> </span>
 							
 						</p>
 
-					</form>
 
 					</div>	
 				</div>
@@ -79,19 +93,44 @@
 		</div>
 
 	</div>
-	<div class="col-12">
-		<button type="button" class="btn btn-secondary btn-lg btn-block btn_Medium_Aquarum">Modificar Electrodomesticos</button>
-	</div>
 
-	<div class="col-12">
-		<button type="button" class="btn btn-secondary btn-lg btn-block btn_Medium_Aquarum">Reportar Consumo Diario</button>
-	</div>
 
-	<div class="col-12">
-		<button type="button" class="btn btn-secondary btn-lg btn-block btn_Medium_Aquarum">Ver Estadisticas</button>
-	</div>
+	<div class="btn-demo mb-4" align= "center">
+		<form style="display: inline;" method="POST">
+			<input type="hidden" name="MenuGrupo" value = "ReportarConsumo">
+			<input type="hidden" name="idGrupo" value = "{{session["idGrupo"]}}">
+			<button type="submit" class="btn btn-info btn-lg">Reportar <br> Consumo</button>
+		</form>
 
-	
+		<form  style="display: inline;" method="POST">
+			<input type="hidden" name="MenuGrupo" value = "VerEstadisticas">
+			<input type="hidden" name="idGrupo" value = "{{session["idGrupo"]}}">
+			<button type="submit" class="btn btn-info btn-lg">Ver <br> Estadisticas</button>
+		</form>
+
+		{% if session["privilegios"][0][0] == "admin" %}			
+		<form style="display: inline;" method="POST">
+			<input type="hidden" name="MenuGrupo" value = "EditarElectrodomesticos">
+			<input type="hidden" name="idGrupo" value = "{{session["idGrupo"]}}">
+			<button type="submit" class="btn btn-info btn-lg">Electro <br> domeseticos</button>
+		</form>
+
+		<form action="/EliminarGrupo" style="display: inline;" method="POST">
+			<input type="hidden" name="MenuGrupo" value = "EliminarGrupo">
+			<input type="hidden" name="idGrupo" value = "{{session["idGrupo"]}}">
+			<button type="submit" class="btn btn-info btn-lg">Eliminar <br> Grupo</button>
+		</form>
+
+		{% else %}
+		<form style="display: inline;" method="POST">
+			<input type="hidden" name="MenuGrupo" value = "VerElectrodomesticos">
+			<input type="hidden" name="idGrupo" value = "{{session["idGrupo"]}}">
+			<button type="button" id = "btn-full"class="btn btn-info">Ver <br>Electrodomeseticos</button>
+		</form>
+		{% endif %}
+
+	  </div>
+
 	</div>
 </div>
 
