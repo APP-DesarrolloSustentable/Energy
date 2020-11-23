@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request, session 
-import database, usuario, poshoUI, electrodomestico, grupo, consumo, tip, const, pymysql
+from Queries import database, usuario, poshoUI, electrodomestico, grupo, consumo, tip, const
+import pymysql
 
 app = Flask(__name__)
 app.secret_key = "secret"
