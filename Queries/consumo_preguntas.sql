@@ -1,3 +1,8 @@
+/*
+Este query consigue las preguntas y sus posibles respuestas para cada
+electrodoméstico registrado en un grupo.
+*/
+
 START TRANSACTION;
 
 DELIMITER $$
@@ -6,7 +11,7 @@ CREATE PROCEDURE consumo_preguntas()
 BEGIN
 
 	SET @g_id = 17;
-	
+
 	SELECT	DISTINCT electrodomestico.id_electrodomestico,
 			electrodomestico.nombre,
 			pregunta.pregunta,
@@ -22,9 +27,9 @@ BEGIN
 			AND grupo_electrodomestico.id_electrodomestico = electrodomestico.id_electrodomestico
 			AND electrodomestico.id_electrodomestico = electrodomestico_pregunta.id_electrodomestico
 			AND electrodomestico_pregunta.id_pregunta = pregunta.id_pregunta;
-			
 
-			
+
+
 
 END $$
 DELIMITER ;
