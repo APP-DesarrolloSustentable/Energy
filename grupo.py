@@ -44,7 +44,7 @@ def Invitar(id_grupo, id_usuario):
     VALUES(
         '"""+str(id_grupo)+"""',
         '"""+str(id_usuario)+"""',
-        'basic')
+        'basic')      
     """)
     return result
 
