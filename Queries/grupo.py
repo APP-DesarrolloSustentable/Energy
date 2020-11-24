@@ -45,9 +45,17 @@ def Invitar(id_grupo, id_usuario):
     VALUES(
         '"""+str(id_grupo)+"""',
         '"""+str(id_usuario)+"""',
-        'basic')      
+        'basic') 
     """)
     return result
+
+
+#todavia no funciona
+def InvitarSinRepetir(id_grupo, id_usuario):
+    result = database.Query("""CALL invitar('""" +str(id_grupo) + """', '"""+str(id_usuario)+"""');
+    """)
+    return result
+
 
 def CambiarRol(g_id, m_id, rol):
     result = database.Query("""
@@ -115,3 +123,34 @@ def getPuntaje(id_Grupo):
     WHERE id_grupo ='"""+ str(id_Grupo) +"""'
         """)
     return result
+
+
+
+def ImprimirElectrodomesticos(id_g):
+    tabla = database.Query("""
+    SELECT DISTINCT
+    electrodomestico.id_electrodomestico,
+    electrodomestico.nombre,
+    electrodomestico.consumo_por_hora
+    FROM
+        grupo_electrodomestico,
+        electrodomestico
+    WHERE
+        grupo_electrodomestico.id_grupo = """+str(id_g)+"""
+        AND electrodomestico.id_electrodomestico = grupo_electrodomestico.id_electrodomestico
+    """)
+
+    return tabla
+
+
+
+def EliminarElectrodomesticos(id_g):
+    tabla = database.Query("""
+    DELETE FROM 
+        grupo_electrodomestico 
+    WHERE 
+    id_grupo = '
+     """+str(id_g)+"""'     
+    """)
+    return tabla
+

@@ -72,8 +72,12 @@ def Listar():
     result = database.Query("""
     SELECT
         id_electrodomestico,
-        nombre
+        nombre,
+        consumo_por_hora
     FROM
         electrodomestico
     """)
     return result
+
+
+

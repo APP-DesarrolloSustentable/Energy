@@ -109,10 +109,10 @@
 		</form>
 
 		{% if session["privilegios"][0][0] == "admin" %}			
-		<form style="display: inline;" method="POST">
+		<form action="/EditarElectrodomesticos" style="display: inline;" method="POST">
 			<input type="hidden" name="MenuGrupo" value = "EditarElectrodomesticos">
 			<input type="hidden" name="idGrupo" value = "{{session["idGrupo"]}}">
-			<button type="submit" class="btn btn-info btn-lg">Electro <br> domeseticos</button>
+			<button type="submit" class="btn btn-info btn-lg"> Editar Electro- <br> domeseticos</button>
 		</form>
 
 		<form action="/EliminarGrupo" style="display: inline;" method="POST">
@@ -122,10 +122,10 @@
 		</form>
 
 		{% else %}
-		<form style="display: inline;" method="POST">
+		<form action="/VerElectrodomesticos" style="display: inline;" method="POST" >
 			<input type="hidden" name="MenuGrupo" value = "VerElectrodomesticos">
 			<input type="hidden" name="idGrupo" value = "{{session["idGrupo"]}}">
-			<button type="button" id = "btn-full"class="btn btn-info">Ver <br>Electrodomeseticos</button>
+			<button type="submit" id = "btn-full"class="btn btn-info">Ver <br>Electrodomeseticos</button>
 		</form>
 		{% endif %}
 

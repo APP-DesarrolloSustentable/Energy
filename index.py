@@ -127,9 +127,63 @@ def UnirseGrupo():
     if session.get('logged_in'):
         if request.method == "POST":
             GrupoIngresar = request.form["codigoGrupo"]
-            grupo.Invitar(GrupoIngresar, session["id"])
+            grupo.InvitarSinRepetir(GrupoIngresar, session["id"])
 
     return redirect(url_for("index"))
+
+
+@app.route('/VerElectrodomesticos', methods=['POST', 'GET'])
+def verElectrodomesticos():
+    if session.get('logged_in'):
+        if request.method == "POST":
+            idGrupo =  request.form["idGrupo"]
+            ElectrodomesticosActivos = grupo.ImprimirElectrodomesticos(idGrupo)
+            print(ElectrodomesticosActivos)
+            size = len(ElectrodomesticosActivos)
+            return render_template('grupo_Ver_Electrodomesticos.html', session=session, electrodomesticos = ElectrodomesticosActivos, size = size) 
+    return redirect(url_for("index"))
+
+@app.route('/EditarElectrodomesticos', methods=['POST', 'GET'])
+def EditarElectrodomesticos():
+    if session.get('logged_in'):
+        if request.method == "POST":
+            idGrupo =  request.form["idGrupo"]
+            ElectrodomesticosActivos = grupo.ImprimirElectrodomesticos(idGrupo)
+            ListaElectrodomesticos = electrodomestico.Listar()
+            Electrodomesticos = []
+            for i in range (len(ListaElectrodomesticos)):
+                ElectroDomestico = []
+                ElectroDomestico.append(ListaElectrodomesticos[i][0])
+                ElectroDomestico.append(ListaElectrodomesticos[i][1])
+                ElectroDomestico.append(ListaElectrodomesticos[i][2])
+                if ListaElectrodomesticos[i] in ElectrodomesticosActivos:
+                    ElectroDomestico.append(True)
+                else: 
+                    ElectroDomestico.append(False)
+                Electrodomesticos.append(ElectroDomestico) 
+            size = len(Electrodomesticos)
+            return render_template('grupo_Editar_Electrodomesticos.html', session=session, electrodomesticos = Electrodomesticos, size = size) 
+    return redirect(url_for("index"))
+
+
+@app.route('/guardarElectrodomesticos', methods=['POST', 'GET'])
+def GuardarElectrodomesticos():
+    if session.get('logged_in'):
+        if request.method == "POST":
+            idGrupo =  request.form["idGrupo"]
+            ListaElectrodomesticos = electrodomestico.Listar()
+            Electrodomesticos = []
+            for i in range (len(ListaElectrodomesticos)):
+                if str(ListaElectrodomesticos[i][0]) in request.form:
+                    Electrodomesticos.append(ListaElectrodomesticos[i][0])
+            grupo.EliminarElectrodomesticos(idGrupo)
+            print(Electrodomesticos)     
+            for idElectrodomestico in Electrodomesticos:
+                grupo.AgregarElectrodomestico(idGrupo, idElectrodomestico)
+            return redirect(url_for("index"))
+    return redirect(url_for("index"))
+
+
 
 @app.route('/EliminarGrupo', methods=['POST', 'GET'])
 def EliminarGrupo():
@@ -137,7 +191,7 @@ def EliminarGrupo():
         if request.method == "POST":
             if request.form["MenuGrupo"] == "EliminarGrupo":
                 idGrupo = request.form["idGrupo"]
-                print(idGrupo)
+                grupo.EliminarElectrodomesticos(idGrupo)
                 grupo.Borrar(idGrupo)
 
     return redirect(url_for("index"))
@@ -193,7 +247,7 @@ def CambiarRol():
                     grupo.CambiarRol(session["idGrupo"], id, privilegios)
                     miembros = grupo.Miembros(session["idGrupo"])        
                     size = len(miembros)
-                    return render_template('grupo.html', session=session, miembros = miembros, size = size)
+                    return redirect(url_for("index"))
                 else: 
                     aviso = "No puede dejar el grupo sin administrador"
                     return render_template('Grupo_Aviso.html', aviso = aviso)
