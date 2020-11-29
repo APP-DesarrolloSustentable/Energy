@@ -107,6 +107,4 @@ BEGIN
 END $$
 DELIMITER ;
 
-CALL consumo_respuestas();
-
 COMMIT;

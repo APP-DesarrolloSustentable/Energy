@@ -1,6 +1,7 @@
 /*
-Este query consigue las preguntas y sus posibles respuestas para cada
-electrodoméstico registrado en un grupo.
+Este query consigue las preguntas, sus posibles respuestas y el consumo
+aproximado (de cada respuesta) para cada electrodoméstico registrado en un
+grupo dado.
 */
 
 START TRANSACTION;
@@ -9,8 +10,6 @@ DELIMITER $$
 DROP PROCEDURE IF EXISTS consumo_preguntas $$
 CREATE PROCEDURE consumo_preguntas(IN g_id INT)
 BEGIN
-
-	SET g_id = 17;
 
 	SELECT	DISTINCT electrodomestico.id_electrodomestico,
 			electrodomestico.nombre,
