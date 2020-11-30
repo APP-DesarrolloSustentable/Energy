@@ -8,7 +8,7 @@ START TRANSACTION;
 
 DELIMITER $$
 DROP PROCEDURE IF EXISTS consumo_preguntas $$
-CREATE PROCEDURE consumo_preguntas(IN g_id INT)
+CREATE PROCEDURE consumo_preguntas(g_id INT)
 BEGIN
 
 	SELECT	DISTINCT electrodomestico.id_electrodomestico,

@@ -7,7 +7,7 @@ START TRANSACTION;
 
 DELIMITER $$
 DROP PROCEDURE IF EXISTS consumo_respuesta $$
-CREATE PROCEDURE consumo_respuesta(IN g_id INT, IN total INT)
+CREATE PROCEDURE consumo_respuesta(g_id INT, total INT)
 BEGIN
 
     SET @registro = (
@@ -19,7 +19,7 @@ BEGIN
 
         IF (@registro IS NULL) THEN
     		INSERT INTO consumo(consumo_electrico, fecha, id_grupo)
-    		VALUES (total, CURDATE(),@g_id);
+    		VALUES (total, CURDATE(),g_id);
 
     		SET @actuales = (SELECT puntos FROM grupo WHERE id_grupo=g_id);
 
