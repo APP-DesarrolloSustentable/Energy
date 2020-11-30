@@ -6,8 +6,8 @@ calculados), crea un registro de Consumo y actualiza la puntuación del Grupo.
 START TRANSACTION;
 
 DELIMITER $$
-DROP PROCEDURE IF EXISTS consumo_respuesta $$
-CREATE PROCEDURE consumo_respuesta(g_id INT, total INT)
+DROP PROCEDURE IF EXISTS consumo_registro_respuesta $$
+CREATE PROCEDURE consumo_registro_respuesta(g_id INT, total INT)
 BEGIN
 
     SET @registro = (
