@@ -19,7 +19,7 @@ BEGIN
 
         IF (@registro IS NULL) THEN
     		INSERT INTO consumo(consumo_electrico, fecha, id_grupo)
-    		VALUES (total, CURDATE(),g_id);
+    		VALUES (total, CURDATE(), g_id);
 
     		SET @actuales = (SELECT puntos FROM grupo WHERE id_grupo=g_id);
 
