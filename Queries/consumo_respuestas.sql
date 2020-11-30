@@ -1,4 +1,5 @@
 /*
+OLD!!
 Este query manda todas las opciones elegidas por un usuario al responder
 preguntas, crea un registro de Consumo y actualiza la puntuación del Grupo.
 */

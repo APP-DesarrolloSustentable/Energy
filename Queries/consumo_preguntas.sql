@@ -15,8 +15,11 @@ BEGIN
 			electrodomestico.nombre,
 			pregunta.pregunta,
 			pregunta.respuesta_1,
+			pregunta.valor_1,
 			pregunta.respuesta_2,
+			pregunta.valor_2,
 			pregunta.respuesta_3
+			pregunta.valor_3
 	FROM	grupo_electrodomestico,
 			electrodomestico,
             electrodomestico_pregunta,
