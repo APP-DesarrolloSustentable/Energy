@@ -41,7 +41,7 @@
 		{% if preguntas[i][3] != None %}			
 
 		<label class="custom-control custom-radio">
-			<input id="radio1" name="{{preguntas[i][0]}}" type="radio" class="custom-control-input" value= "{{preguntas[i][4]}}">
+			<input id="radio1" name="{{preguntas[i][0]}}" type="radio" class="custom-control-input" value= "{{preguntas[i][4]}}" required>
 			<span class="custom-control-indicator"></span>
 			<span class="custom-control-description">{{preguntas[i][3]}}</span>
 		</label>
@@ -52,7 +52,7 @@
 		{% if preguntas[i][5] != None %}			
 
 		<label class="custom-control custom-radio">
-			<input id="radio2" name="{{preguntas[i][0]}}" type="radio" class="custom-control-input" value= "{{preguntas[i][6]}}">
+			<input id="radio2" name="{{preguntas[i][0]}}" type="radio" class="custom-control-input" value= "{{preguntas[i][6]}}"required>
 			<span class="custom-control-indicator"></span>
 			<span class="custom-control-description">{{preguntas[i][5]}}</span>
 		</label>
@@ -63,7 +63,7 @@
 		{% if preguntas[i][7] != None %}			
 
 		<label class="custom-control custom-radio">
-			<input id="radio3" name="{{preguntas[i][0]}}" type="radio" class="custom-control-input" value= "{{preguntas[i][8]}}">
+			<input id="radio3" name="{{preguntas[i][0]}}" type="radio" class="custom-control-input" value= "{{preguntas[i][8]}}"required>
 			<span class="custom-control-indicator"></span>
 			<span class="custom-control-description">{{preguntas[i][7]}}</span>
 		</label>
