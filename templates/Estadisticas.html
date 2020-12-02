@@ -1,0 +1,116 @@
+{% extends "base-Estadisticas.html"%}
+{% block content%}
+
+	<div class="content_wrapper">
+		<div class="container-fluid">
+
+<!--------------------------------------------- Title  --------------------------------------------------------------------------------->
+			<div class="page-heading">
+				<div class="row d-flex align-items-center">
+					<div class="col-12">
+						<div class="page-breadcrumb alig">
+							<h1 align="center">Estadisticas</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+
+<!--------------------------------------------- End Title  --------------------------------------------------------------------------------->
+
+			<div class="row">
+
+<!--------------------------------------------- tips  ---------------------------------------------------------->
+
+<div class=" col-12">
+    <div class="card card-shadow mb-4">
+        <div class="card-header">
+            <div class="card-title" align = "Center">
+               Consumo mes actual
+            </div>
+        </div>
+        <div class="card-body">
+            <div id="line-chart"></div>
+        </div>
+    </div>
+</div>
+
+
+<!--------------------------------------------- End tips  ---------------------------------------------------------->
+
+
+
+</div>
+	
+
+</div>
+<script type="text/javascript" src="../static/js/jquery.min.js"></script>
+<script type="text/javascript" src="../static/js/popper.min.js"></script>
+<script type="text/javascript" src="../static/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../static/js/jquery.mCustomScrollbar.concat.min.js"></script>
+
+<!--Morris Chart-->
+<script src="../static/js/index/morris-chart/morris.js"></script>
+<script src="../static/js/index/morris-chart/raphael-min.js"></script>
+<!--morris chart initialization-
+
+<script src="../static/js/index/morris-chart/morris-init.js"></script>  -->
+
+<!--chartjs Total Profit,New Orders,Yearly Revineue,New Users-->
+<script src="../static/js/Chart.min.js"></script>
+<script src="../static/js/chartjs-init.js"></script>
+
+<script type="text/javascript" src="../static/js/jquery.dcjqaccordion.2.7.js"></script>
+<script src="../static/js/custom.js" type="text/javascript"></script>
+
+
+<script>
+    
+    var day_data = [
+        {"elapsed": "", "value": 8},
+        {"elapsed": "", "value": 34},
+        {"elapsed": "", "value": 53},
+        {"elapsed": "", "value": 12},
+        {"elapsed": "", "value": 13},
+        {"elapsed": "", "value": 22},
+        {"elapsed": "", "value": 5},
+        {"elapsed": "", "value": 26},
+        {"elapsed": "", "value": 12},
+        {"elapsed": "", "value": 19}
+    ];
+    
+    
+            
+    var lineChart = new Morris.Line({
+        element: 'line-chart',
+        data: day_data,
+        xkey: 'elapsed',
+        ykeys: ['value'],
+        labels: ['value'],
+        gridLineColor: '#e5ebf8',
+        lineColors:['#FF518A'],
+        parseTime: false,
+        lineWidth: 1
+    });
+    
+    
+    jQuery(function($) {
+        $(window).on('resize', function() {
+         setTimeout(function(){
+             
+           var $line_Chart =  $('#line-chart');
+           var line_svg = $line_Chart.width();
+           $line_Chart.find("svg").width(line_svg);
+           lineChart.redraw();
+    
+        })
+        });
+    });
+    
+    
+    
+    </script>
+    
+        
+{% endblock %}
+
+	

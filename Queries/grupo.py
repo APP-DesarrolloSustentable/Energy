@@ -50,12 +50,21 @@ def Invitar(id_grupo, id_usuario):
     return result
 
 
-#todavia no funciona
-def InvitarSinRepetir(id_grupo, id_usuario):
-    result = database.Query("""CALL invitar('""" +str(id_grupo) + """', '"""+str(id_usuario)+"""');
+def InvitarSinRepetir(g_id, id_usuario):
+    result = database.Query("""CALL invitar('""" +str(g_id) + """', '"""+str(id_usuario)+"""');
     """)
     return result
 
+
+def ListarPreguntas(g_id):
+    result = database.Query("""CALL consumo_registro_preguntas('""" +str(g_id) + """');
+    """)
+    return result
+
+def ReportarConsumo(g_id, consumo):
+    result = database.Query("""CALL consumo_registro_respuesta('""" +str(g_id) + """', '""" +str(consumo) + """');
+    """)
+    return result
 
 def CambiarRol(g_id, m_id, rol):
     result = database.Query("""
@@ -153,4 +162,7 @@ def EliminarElectrodomesticos(id_g):
      """+str(id_g)+"""'     
     """)
     return tabla
+
+
+
 

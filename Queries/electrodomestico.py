@@ -81,3 +81,13 @@ def Listar():
 
 
 
+def getConsumo(e_id):
+    result = database.Query("""
+    SELECT
+        consumo_por_hora
+    FROM
+        electrodomestico
+    WHERE 
+        id_electrodomestico = '""" +  str(e_id) + """' 
+    """)
+    return result

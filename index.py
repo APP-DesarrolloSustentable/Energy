@@ -85,6 +85,46 @@ def inicio():
     else:
         return redirect(url_for("index"))
 
+
+@app.route('/ReportarConsumo', methods=['POST', 'GET'])
+def consumo():
+    if session.get('logged_in'):
+        if request.method == "POST":
+            idGrupo =  request.form["idGrupo"]
+            preguntas = grupo.ListarPreguntas(idGrupo)
+            print(preguntas)
+            size = len(preguntas)
+            return render_template('Reportar_Consumo.html', session=session, preguntas = preguntas, size = size) 
+    return redirect(url_for("index"))
+
+
+@app.route('/GuardarConsumo', methods=['POST', 'GET'])
+def GuardarConsumo():
+    if session.get('logged_in'):
+        if request.method == "POST":
+            idGrupo =  request.form["idGrupo"]
+            preguntas = grupo.ListarPreguntas(idGrupo)
+            sum = 0
+            for i in range(len(preguntas)):
+                sum += int(request.form[str(preguntas[i][0])]) * int(electrodomestico.getConsumo(preguntas[i][0])[0][0])
+            print(sum)
+            grupo.ReportarConsumo(idGrupo, sum)
+
+            return redirect(url_for("index"))
+    return redirect(url_for("index"))
+
+
+
+@app.route('/verEstadisticas', methods=['POST', 'GET'])
+def verEstadisticas():
+    if session.get('logged_in'):
+        if request.method == "POST":
+            idGrupo =  request.form["idGrupo"]
+            return render_template('Estadisticas.html', session=session) 
+    return redirect(url_for("index"))
+
+
+
 @app.route('/cerrar_sesion', methods=['POST', 'GET'])
 def cerrar_sesion():
     session.clear()
@@ -195,6 +235,20 @@ def EliminarGrupo():
                 grupo.Borrar(idGrupo)
 
     return redirect(url_for("index"))
+
+
+
+
+@app.route('/SalirGrupo', methods=['POST', 'GET'])
+def SalirGrupo():
+    if session.get('logged_in'):
+        if request.method == "POST":
+            if request.form["MenuGrupo"] == "SalirGrupo":
+                idGrupo = request.form["idGrupo"]
+                grupo.QuitarMiembro(idGrupo, session["id"])
+
+    return redirect(url_for("index"))
+
 
 
 @app.route('/EliminarMiembro', methods=['POST', 'GET'])

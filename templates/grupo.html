@@ -96,13 +96,13 @@
 
 
 	<div class="btn-demo mb-4" align= "center">
-		<form style="display: inline;" method="POST">
+		<form action="/ReportarConsumo" style="display: inline;" method="POST">
 			<input type="hidden" name="MenuGrupo" value = "ReportarConsumo">
 			<input type="hidden" name="idGrupo" value = "{{session["idGrupo"]}}">
 			<button type="submit" class="btn btn-info btn-lg">Reportar <br> Consumo</button>
 		</form>
 
-		<form  style="display: inline;" method="POST">
+		<form  action="/verEstadisticas" style="display: inline;" method="POST">
 			<input type="hidden" name="MenuGrupo" value = "VerEstadisticas">
 			<input type="hidden" name="idGrupo" value = "{{session["idGrupo"]}}">
 			<button type="submit" class="btn btn-info btn-lg">Ver <br> Estadisticas</button>
@@ -125,8 +125,15 @@
 		<form action="/VerElectrodomesticos" style="display: inline;" method="POST" >
 			<input type="hidden" name="MenuGrupo" value = "VerElectrodomesticos">
 			<input type="hidden" name="idGrupo" value = "{{session["idGrupo"]}}">
-			<button type="submit" id = "btn-full"class="btn btn-info">Ver <br>Electrodomeseticos</button>
+			<button type="submit" class="btn btn-info ">Ver Electro- <br>domeseticos</button>
 		</form>
+
+		<form action="/SalirGrupo" style="display: inline;" method="POST">
+			<input type="hidden" name="MenuGrupo" value = "SalirGrupo">
+			<input type="hidden" name="idGrupo" value = "{{session["idGrupo"]}}">
+			<button type="submit" class="btn btn-info btn-lg">Salir de <br> Grupo</button>
+		</form>
+
 		{% endif %}
 
 	  </div>
