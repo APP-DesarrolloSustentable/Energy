@@ -123,7 +123,14 @@ def verEstadisticas():
             consumoMesActual = grupo.ConsumoMesActual(idGrupo)
             print(consumoMesActual)
             size = len(consumoMesActual)
-            return render_template('Estadisticas.html', session=session, size = size, consumoMesActual = consumoMesActual) 
+            consumoAño = grupo.ConsumoAño(idGrupo)
+            size2 = len(consumoAño)
+            consumoMes = list()
+            for consumo in consumoAño:
+                print(consumoAño)
+                consumoMes.append(str(round((consumo[2]/1000) , 2)))
+            print(consumoMes)
+            return render_template('Estadisticas.html', session=session, size = size, consumoMesActual = consumoMesActual, consumoMes = consumoMes, size2= size2, consumoAño = consumoAño) 
     return redirect(url_for("index"))
 
 
