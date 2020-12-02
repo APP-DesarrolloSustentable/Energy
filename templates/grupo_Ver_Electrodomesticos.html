@@ -1,0 +1,84 @@
+{% extends "base.html"%}
+{% block content%}
+
+	<div class="content_wrapper">
+		<div class="container-fluid">
+
+<!--------------------------------------------- Title  --------------------------------------------------------------------------------->
+			<div class="page-heading">
+				<div class="row d-flex align-items-center">
+					<div class="col-12">
+						<div class="page-breadcrumb alig">
+							<h1 align="center"> {{session["nombreGrupo"][0][0]}}</h1>
+
+							<!--<h2 align="center"> Puntaje: <b> {{session["puntaje"][0][0]}}</b> </h2>	<br> -->
+		
+							
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+		
+<!--------------------------------------------- End Title  --------------------------------------------------------------------------------->
+
+<div class="col-12">
+	<div class="card card-shadow mb-4">
+		<div class="card-header">
+			<div class="card-title" align="center">
+				Electrodomesticos
+				<div class="btn-group float-right task-list-action">
+			
+				</div>
+			</div>
+		</div>
+		<div class="card-body">
+
+				{% for i in range(size)%}
+
+				<div class="media mb-4">
+					<div class="media-body">
+						<p class="mb-0">
+							<strong class="">{{electrodomesticos[i][1]}}</strong>  <br/>
+							<span>{{electrodomesticos[i][2]}} W/h</span> <br/>
+
+						</p>
+
+
+					</div>	
+				</div>
+				{% endfor %}
+
+
+					
+		</div>
+
+	</div>
+
+
+	<div class="btn-demo mb-4" align= "center">
+
+		<form action="/grupo" style="display: inline;" method="POST" >
+			<input type="hidden" name="MenuGrupo" value = "VerElectrodomesticos">
+			<input type="hidden" name="idGrupo" value = "{{session["idGrupo"]}}">
+			<button type="submit" id = "btn-full"class="btn btn-info">Volver</button>
+		</form>
+
+	  </div>
+
+	</div>
+</div>
+
+<!--------------------------------------------- tips  ---------------------------------------------------------->
+
+<!--------------------------------------------- End tips  ---------------------------------------------------------->
+
+
+		</div>
+	</div>
+
+
+{% endblock %}
+
+	

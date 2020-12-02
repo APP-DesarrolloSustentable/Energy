@@ -1,0 +1,46 @@
+{% extends "base.html"%}
+{% block content%}
+
+	<div class="content_wrapper">
+		<div class="container-fluid">
+
+<!--------------------------------------------- Title  --------------------------------------------------------------------------------->
+			<div class="page-heading">
+				<div class="row d-flex align-items-center">
+					<div class="col-12">
+						<div class="page-breadcrumb alig">
+                            <h1 align="center">Configuracion</h1>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+<!--------------------------------------------- Error  --------------------------------------------------------------------------------->
+
+                <div class="page-heading">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-12">
+                            <div class="page-breadcrumb alig">
+                                <div  align="center" class="alert alert-danger border-0" role="alert">
+                                    {{error}}                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<!--------------------------------------------- End Error  ---------------------------------------------------------->
+                <form method="get" action="/configuracion">
+                    <div class="col-12">
+						<button type="submit" class="btn btn-secondary btn-lg btn-block btn_Medium_Aquarum">Volver a configuracion</button>
+                    </div>                
+                </form>
+			</div>
+
+		</div>
+	</div>
+
+
+{% endblock %}
+
+	

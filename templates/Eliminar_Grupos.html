@@ -1,0 +1,88 @@
+{% extends "base.html"%}
+{% block content%}
+
+	<div class="content_wrapper">
+		<div class="container-fluid">
+
+<!--------------------------------------------- Title  --------------------------------------------------------------------------------->
+			<div class="page-heading">
+				<div class="row d-flex align-items-center" id="title_header">
+					<div class="col-12">
+						<div class="page-breadcrumb alig">
+							<h1 align="center" class= "title-header">Mis grupos</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+
+<!--------------------------------------------- End Title  --------------------------------------------------------------------------------->
+
+<!--------------------------------------------- Mensaje Agregar Grupo  --------------------------------------------------------------------------------->
+
+	{% if size == 0 %}					
+		<div class="page-breadcrumb alig" align="center">
+			<p align="center" class= "title-header">Ingreasr nombre de grupo y dar click en "Crear" para crear tu primer grupo</p>
+		</div>
+	{% endif %}
+<!---------------------------------------------  End Mensaje Agregar Grupo  --------------------------------------------------------------------------------->
+
+			<div class="row">
+<!--------------------------------------------- Group Box ---------------------------------------------------------->
+						{% for i in range(size)%}
+							<div class="col-12">
+								<form action="/grupo" method="POST">
+									<input type="hidden" name="idGrupo" value="{{session['gruposAdmin'][i][0]}}">
+									<button  type= "submit" class="info_items {{color[i%3]}} d-flex align-items-center groups">
+									<span class="info_items_icon"> <i class="ion-android-people"></i> </span>
+									<div class="info_item_content">
+										<span class="info_items_text">{{session["gruposAdmin"][i][1]}}</span>
+										<span class="info_items_number">{{session["gruposAdmin"][i][2]}}</span>
+
+									</div>
+								</button>
+							</form>
+							</div>
+						{% endfor %}
+
+				
+
+
+<!--------------------------------------------- End Group Box  --------------------------------------------------------------------------------->
+
+
+<!--------------------------------------------- Crear Grupo ---------------------------------------------------------->
+
+	<div class="col-12">
+		<form action="/UnirseGrupo" method="POST">
+		<div class="input-group mb-4">
+			<input type="text" class="form-control" name ="codigoGrupo" placeholder="codigo de grupo">
+			<span class="input-group-btn">
+				<button class="btn btn-info btn_Medium_Aquarum" type="submit">Unirse</button>
+			</span>
+		</div>
+	</form>
+</div>
+
+	<div class="col-12">
+		<form action="/CrearGrupo" method="POST">
+		<div class="input-group mb-4">
+			<input type="text" class="form-control" name ="nombreGrupo" placeholder="Nombre de grupo">
+			<span class="input-group-btn">
+				<button class="btn btn-info btn_Medium_Aquarum" type="submit">Crear</button>
+			</span>
+		</div>
+	</form>
+</div>
+
+	
+<!--------------------------------------------- End Crear Grupo ---------------------------------------------------------->
+
+			</div>
+
+		</div>
+	</div>
+
+
+{% endblock %}
+
+	
