@@ -61,6 +61,13 @@ def ListarPreguntas(g_id):
     """)
     return result
 
+
+
+def ConsumoMesActual(g_id):
+    result = database.Query("""CALL consumo_lista_mes_actual('""" +str(g_id) + """');
+    """)
+    return result
+
 def ReportarConsumo(g_id, consumo):
     result = database.Query("""CALL consumo_registro_respuesta('""" +str(g_id) + """', '""" +str(consumo) + """');
     """)

@@ -23,11 +23,13 @@
 
 <div class=" col-12">
     <div class="card card-shadow mb-4">
-        <div class="card-header">
+        <div class="card-header" align="center"> 
             <div class="card-title" align = "Center">
                Consumo mes actual
             </div>
+            
         </div>
+        
         <div class="card-body">
             <div id="line-chart"></div>
         </div>
@@ -66,16 +68,9 @@
 <script>
     
     var day_data = [
-        {"elapsed": "", "value": 8},
-        {"elapsed": "", "value": 34},
-        {"elapsed": "", "value": 53},
-        {"elapsed": "", "value": 12},
-        {"elapsed": "", "value": 13},
-        {"elapsed": "", "value": 22},
-        {"elapsed": "", "value": 5},
-        {"elapsed": "", "value": 26},
-        {"elapsed": "", "value": 12},
-        {"elapsed": "", "value": 19}
+        {%for i in range(size)%}
+            {"elapsed": "", "value": {{consumoMesActual[i][1]}}},
+        {% endfor %}
     ];
     
     

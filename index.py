@@ -120,7 +120,10 @@ def verEstadisticas():
     if session.get('logged_in'):
         if request.method == "POST":
             idGrupo =  request.form["idGrupo"]
-            return render_template('Estadisticas.html', session=session) 
+            consumoMesActual = grupo.ConsumoMesActual(idGrupo)
+            print(consumoMesActual)
+            size = len(consumoMesActual)
+            return render_template('Estadisticas.html', session=session, size = size, consumoMesActual = consumoMesActual) 
     return redirect(url_for("index"))
 
 

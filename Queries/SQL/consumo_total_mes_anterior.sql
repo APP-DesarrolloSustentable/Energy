@@ -1,5 +1,5 @@
 /*
-Este query te trae el consumo total del mes actual dado un id_grupo.
+Este query te trae el consumo total del mes anterior dado un id_grupo.
 */
 
 START TRANSACTION;
