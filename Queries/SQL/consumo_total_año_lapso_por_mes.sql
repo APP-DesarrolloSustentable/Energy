@@ -2,12 +2,12 @@
 Este query te trae el consumo total de los últimos 12 meses, agrupado por meses,
 dado un id_grupo y una fecha.
 
-    +-----+---------+
-    | Mes | Consumo |
-    +-----+---------+
-    |   2 |     280 |
-    |   3 |    1270 |
-    +-----+---------+
+    +------+-----+---------+
+    |  Año | Mes | Consumo |
+    +------+-----+---------+
+    | 2019 |   2 |     280 |
+    | 2020 |   3 |    1270 |
+    +------+-----+---------+
 */
 
 START TRANSACTION;
@@ -17,7 +17,8 @@ DROP PROCEDURE IF EXISTS consumo_total_lapso_año_por_mes $$
 CREATE PROCEDURE consumo_total_año_lapso_por_mes(g_id INT)
 BEGIN
 
-    SELECT      MONTH(fecha) AS Mes,
+    SELECT      YEAR(fecha) AS Año,
+                MONTH(fecha) AS Mes,
                 SUM(consumo_electrico) AS Consumo
     FROM        consumo
     WHERE       (
@@ -29,7 +30,8 @@ BEGIN
                     )
                 )
                 AND id_grupo=g_id
-    GROUP BY    MONTH(fecha);
+    GROUP BY    MONTH(fecha)
+    ORDER BY    YEAR(fecha), MONTH(fecha);
 
 END $$
 DELIMITER ;
