@@ -16,8 +16,6 @@ def index():
         return redirect(url_for("IniciarSesion"))
 
 
-
-
 @app.route('/Iniciar_Sesion', methods=['POST', 'GET'])
 def IniciarSesion():
     error = ""
@@ -295,18 +293,16 @@ def CambiarRol():
                 for miembro in miembros:
                     if miembro[3] == "admin":
                         contAdmin +=1
-                if contAdmin > 1:
-                    id = request.form["userID"]
-                    correo = usuario.getCorreo(id)
-                    privilegios = usuario.getPrivilegios(session["idGrupo"], correo)[0][0]
-                    print(session["idGrupo"], id, correo, privilegios)
+                id = request.form["userID"]                
+                correo = usuario.getCorreo(id)
+                privilegios = usuario.getPrivilegios(session["idGrupo"], correo)[0][0]
 
+                if contAdmin > 1 or privilegios == "basic":
                     if privilegios == "admin":
                         privilegios = "basic"
                     else: 
                         privilegios = "admin"
 
-                    print(privilegios)
                     session["privilegios"] = privilegios
                     grupo.CambiarRol(session["idGrupo"], id, privilegios)
                     miembros = grupo.Miembros(session["idGrupo"])        
