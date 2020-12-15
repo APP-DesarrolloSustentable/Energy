@@ -104,7 +104,8 @@ def GuardarConsumo():
             preguntas = grupo.ListarPreguntas(idGrupo)
             sum = 0
             for i in range(len(preguntas)):
-                sum += int(request.form[str(preguntas[i][0])]) * int(electrodomestico.getConsumo(preguntas[i][0])[0][0])
+                #sum += int(request.form[str(preguntas[i][0])]) * int(electrodomestico.getConsumo(preguntas[i][0])[0][0])
+                sum += int(request.form[str(preguntas[i][0])]) * 0.966 / 65
             print(sum)
             grupo.ReportarConsumo(idGrupo, sum)
 
