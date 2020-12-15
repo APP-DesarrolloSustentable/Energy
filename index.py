@@ -369,23 +369,23 @@ def configuracion():
         return redirect(url_for("index"))
 
 # Cantidades
-@app.route('/postjson', methods = ['POST'])
-def postJsonHandler():
+#@app.route('/postjson', methods = ['POST'])
+#def postJsonHandler():
         # print (request.is_json)
         content = request.get_json()
         # print (content)
 
 
-        for key in content:
+        #for key in content:
             # idgrupo, idElectrodomestico, cant
             # print(str(content["idGrupo"])+str(key)+str(content[key]))
-            g_id = str(content["idGrupo"])
-            e_id = str(key)
-            cant = str(content[key])
-            print("lol "+g_id+e_id+cant)
-            database.Query("CALL grupo_electrodomestico_actualizar_cantidades("+g_id+","+e_id+","+cant+")")
+            #g_id = str(content["idGrupo"])
+            #e_id = str(key)
+            #cant = str(content[key])
+            #print("lol "+g_id+e_id+cant)
+            #database.Query("CALL grupo_electrodomestico_actualizar_cantidades("+g_id+","+e_id+","+cant+")")
 
-        return 'JSON posted'
+        #return 'JSON posted'
 
 
 if __name__ == '__main__':
