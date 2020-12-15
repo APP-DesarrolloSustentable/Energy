@@ -33,18 +33,40 @@
 				</div>
 			</div>
 		</div>
+		<script>
+			const data = {idGrupo: "{{session["idGrupo"]}}"}; 
+			const handleChangeNumber = (id, n) => { 
+				data[id] = document.getElementById("cant_"+id).value;
+				
+			}
+			const handleForm = () => {
+				fetch('http://127.0.0.1:5000/postjson', {
+					method: 'POST',
+					headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(data)
+				}).then(() => {
+					return true;
+				})
+			}
+		</script>
 		<div class="card-body">
 
 				{% for i in range(size)%}
-				<form action="/guardarElectrodomesticos" method="POST"> 
+				<form id="myForm" onsubmit="handleForm()" action="/guardarElectrodomesticos" method="POST"> 
 				<div class="media mb-4">
 					<div class="media-body">
-						<p class="mb-0">
+						<p class="mb-0; ">
 							<strong class="">{{electrodomesticos[i][1]}}</strong>  <br/>
 							<span>{{electrodomesticos[i][2]}} W/h</span> <br/>
 							
 						</p>
+						
 					</div>	
+					<label for="cantidad" style="margin-right: 10px;">Cantidad</label>
+					<input style="display: inline-block; margin-right: 20px;" id="cant_{{electrodomesticos[i][0]}}" type="number" onchange="handleChangeNumber({{electrodomesticos[i][0]}})" value="1" min="1">
 					<div class="custom-control custom-checkbox" style="float: right;">
 						<input type="checkbox" class="custom-control-input" id="{{electrodomesticos[i][0]}}"  name="{{electrodomesticos[i][0]}}" value="{{electrodomesticos[i][0]}}" style="float: right;" {% if electrodomesticos[i][3] %}  checked="checked" {% endif%}>
 						<label class="custom-control-label" for="{{electrodomesticos[i][0]}}"></label>
@@ -60,7 +82,7 @@
 	</div>
 
 
-		<div class="btn-demo mb-4" align= "center">
+		<div class="btn-demo mb-4" align="center">
 
 			<input type="hidden" name="MenuGrupo" value = "VerElectrodomesticos">
 			<input type="hidden" name="idGrupo" value = "{{session["idGrupo"]}}">

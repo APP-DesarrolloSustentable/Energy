@@ -9,7 +9,7 @@
 				<div class="row d-flex align-items-center">
 					<div class="col-12">
 						<div class="page-breadcrumb alig">
-							<h1 align="center">Estadisticas</h1>
+							<h1 align="center">Estadísticas</h1>
 						</div>
 					</div>
 				</div>
@@ -40,7 +40,7 @@
         <div class="card card-shadow mb-4">
             <div class="card-header">
                 <div class="card-title" align="center">
-                    Consumo Total por Mes
+                    Costo Total por Mes
                 </div>
             </div>
             <div class="card-body">
@@ -55,7 +55,7 @@
                         {%for i in range(size2)%}
                         <tr>
                             <td> {{consumoAño[i][1]}}/{{consumoAño[i][0]}}</td>
-                            <td>  {{consumoMes[i]}} kW</td>
+                            <td>$  {{consumoMes[i]}} </td>
                         </tr>
                         {% endfor %}
                     </tbody>
